@@ -349,54 +349,138 @@ section {
     left: 20%;
     animation-delay: 14s;
 }
-
 .geo-shape {
     position: absolute;
     opacity: 0.12;
-    animation: rotate-float 30s infinite linear;
     border-radius: 50%;
     pointer-events: none;
+    animation: rotate-float 30s infinite ease-in-out;
 }
 
-/* Pelota de pádel grande */
+/* =========================
+   PELOTA DE PÁDEL PRINCIPAL
+   ========================= */
 .geo-1 {
     width: 300px;
     height: 300px;
     top: 20%;
     right: 10%;
-    background: radial-gradient(
-        circle at 30% 30%,
-        #baff4d 0%,
-        #7cff00 40%,
-        #5ec700 70%,
-        #3a8f00 100%
-    );
+
+    background:
+        radial-gradient(circle at 30% 30%,
+            #f6ffb0 0%,
+            #e8f36a 35%,
+            #cfe347 60%,
+            #9ebc2f 100%
+        );
+
     box-shadow:
-        inset -20px -20px 40px rgba(0, 0, 0, 0.25),
-        inset 15px 15px 30px rgba(255, 255, 255, 0.2),
-        0 0 60px rgba(124, 255, 0, 0.25);
+        inset -18px -18px 30px rgba(0, 0, 0, 0.25),
+        inset 10px 10px 20px rgba(255, 255, 255, 0.15),
+        0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* Pelota de pádel secundaria */
+/* Textura tipo fieltro */
+.geo-1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        repeating-radial-gradient(
+            circle,
+            rgba(255,255,255,0.06) 0px,
+            rgba(255,255,255,0.02) 2px,
+            rgba(0,0,0,0.04) 4px
+        );
+    mix-blend-mode: overlay;
+}
+
+/* Costura blanca */
+.geo-1::after {
+    content: "";
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.75);
+    clip-path: polygon(
+        0% 40%, 20% 45%, 40% 55%, 60% 50%, 80% 45%, 100% 50%,
+        100% 60%, 80% 55%, 60% 45%, 40% 50%, 20% 55%, 0% 60%
+    );
+    transform: rotate(15deg);
+    opacity: 0.7;
+}
+
+/* =========================
+   PELOTA SECUNDARIA
+   ========================= */
 .geo-2 {
-    width: 250px;
-    height: 250px;
-    bottom: 20%;
-    left: 5%;
-    background: radial-gradient(
-        circle at 30% 30%,
-        #baff4d 0%,
-        #7cff00 45%,
-        #5ec700 75%,
-        #3a8f00 100%
-    );
+    width: 220px;
+    height: 220px;
+    bottom: 18%;
+    left: 6%;
+
+    background:
+        radial-gradient(circle at 30% 30%,
+            #f6ffb0 0%,
+            #e8f36a 35%,
+            #cfe347 60%,
+            #9ebc2f 100%
+        );
+
     box-shadow:
-        inset -16px -16px 30px rgba(0, 0, 0, 0.25),
-        inset 12px 12px 25px rgba(255, 255, 255, 0.2),
-        0 0 50px rgba(124, 255, 0, 0.2);
-    animation-delay: -10s;
+        inset -14px -14px 25px rgba(0, 0, 0, 0.22),
+        inset 8px 8px 18px rgba(255, 255, 255, 0.12),
+        0 16px 30px rgba(0, 0, 0, 0.22);
+
+    animation-delay: -12s;
 }
 
+.geo-2::before,
+.geo-2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+}
+
+/* Textura */
+.geo-2::before {
+    background:
+        repeating-radial-gradient(
+            circle,
+            rgba(255,255,255,0.05) 0px,
+            rgba(0,0,0,0.03) 3px
+        );
+    mix-blend-mode: overlay;
+}
+
+/* Costura */
+.geo-2::after {
+    inset: 14%;
+    border: 2px solid rgba(255,255,255,0.6);
+    clip-path: polygon(
+        0% 42%, 25% 48%, 50% 52%, 75% 48%, 100% 52%,
+        100% 58%, 75% 52%, 50% 48%, 25% 52%, 0% 58%
+    );
+    transform: rotate(-10deg);
+    opacity: 0.6;
+}
+
+/* =========================
+   ANIMACIÓN
+   ========================= */
+@keyframes rotate-float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-18px) rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
 
 @keyframes float {
     0%, 100% {
@@ -410,18 +494,6 @@ section {
     }
     75% {
         transform: translate(80px, 100px) scale(1.05) rotate(270deg);
-    }
-}
-
-@keyframes rotate-float {
-    0% {
-        transform: rotate(0deg) translateY(0);
-    }
-    50% {
-        transform: rotate(180deg) translateY(-50px);
-    }
-    100% {
-        transform: rotate(360deg) translateY(0);
     }
 }
 
